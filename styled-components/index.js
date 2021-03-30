@@ -3,7 +3,7 @@
 function component(strings, ...dynamicValues) {
   //creo una funcion que recibe una props como parametro
   return function (props) {
-    let newContent = strings.slice();
+    let newContent = strings.slice(); //genero una copia de los string
     dynamicValues.map((value, index) => {
       newContent[index] += props[value]; //le paso el value iterado por map
     });
@@ -11,23 +11,36 @@ function component(strings, ...dynamicValues) {
   };
 }
 
-const styled = {
-  h1: function (styles) {
+//itero los tags para que sean dinamicos
+const tags = [
+  'head',
+  'tittle',
+  'body',
+  'section',
+  'nav',
+  'hearder',
+  'footer',
+  'main',
+  'p',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+];
+const myStyled = {};
+tags.map((tags) => {
+  myStyled[tags] = function (styles) {
+    //styles en este caso seria mi string de estilos
     return function (content) {
       //retorno una funcion para que el value(content) sea dinamico
       return `
-        <h1 style='${styles}'>
-            ${content}
-        </h1>
-        `;
+        <${tags} style='${styles}'>${content}</${tags}>`;
     };
-  },
-  h2: '',
-  div: '',
-};
+  };
+});
 
 //llamo a mi styled Component y lo utilizo como un tagged-template
-const TitleStyled = styled.h1`
+const TitleStyled = myStyled.h1`
   color: blue;
   font-size: 50px;
   text-shadow: 2px 2px 0 black;
