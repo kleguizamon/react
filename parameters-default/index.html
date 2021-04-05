@@ -21,35 +21,7 @@
       </div>
       <button id="btn" class="button">Preparar Helado</button>
    </main>
-   <script>
-      const $flavors = document.querySelectorAll('.flavor');
-
-      $flavors.forEach($element => $element.addEventListener('click', selectFlavor))
-
-      function selectFlavor() {
-         this.classList.toggle('is-active')
-      }
-
-      function isRequired(param) {
-         throw new Error(`${param} es requerido`)
-      }
-
-      function makeIceCream([flavor1 = isRequired('flavor1'), flavor2 = isRequired('flavor2'), ...otherFlavors]) {
-         //como valor por defecto le paso una funcion donde valido los parametros
-         const toppings = otherFlavors.map((f) => f.dataset.flavor)
-         //para acceder a mi data-flavor lo hago con dataset
-         alert(`armaste un  helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor}! con los topping ${toppings}`)
-      }
-
-      window.btn.addEventListener('click', () => {
-         const $flavors = document.querySelectorAll('.flavor.is-active')
-         try {
-            makeIceCream([...$flavors])
-         } catch (error) {
-            alert('no completaste los sabores')
-         }
-      })
-   </script>
+   <script src="./js/app.js" type="module"> </script>
 </body>
 
 </html>
